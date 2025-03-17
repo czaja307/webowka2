@@ -106,4 +106,34 @@ function rpa_register_styles() {
     wp_enqueue_style('rpa-styles');
 }
 add_action('init', 'rpa_register_styles');
+
+function rpa_shortcode() {
+    $announcements = get_option('rpa_announcements', []);
+    if(empty($announcements)){
+        return '';
+    }
+    $today = date('Y-m-d');
+    $valid_announcements = [];
+
+    foreach ($announcements as $announcement) {
+        if (
+            (empty($announcement['start_date']) || $today >= $announcement['start_date']) &&
+            (empty($announcement['end_date']) || $today <= $announcement['end_date'])
+        )
+        {
+            $valid_announcements[] = $announcement['announcement'];
+        }
+    }
+
+    if (!empty($valid_announcements)) {
+        $random_announcement = $valid_announcements[array_rand($valid_announcements)];
+
+        return '<div class="rpa-announcement">' . wp_kses_post($random_announcement) . '</div>';
+    }
+
+    return '';
+}
+
+add_shortcode('rpa_shortcode', 'rpa_shortcode')
+
 ?>
