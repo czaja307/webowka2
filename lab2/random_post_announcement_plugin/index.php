@@ -40,7 +40,7 @@
             <div id="announcements-container">
                 <?php foreach ($announcements as $index => $announcement) : ?>
                     <div class="announcement-item">
-                        <input type="text" name="rpa_announcements[]" value="<?php echo esc_attr($announcement['announcement']); ?>" style="width:80%;">
+                        <input type="text" name="rpa_announcements[]" value="<?php echo esc_attr($announcement['announcement']); ?>" style="width:60%;">
                         <input type="date" name="rpa_start_date[]" value="<?php echo esc_attr($announcement['start_date']); ?>">
                         <input type="date" name="rpa_end_date[]" value="<?php echo esc_attr($announcement['end_date']); ?>">
                         <button type="button" class="remove-announcement">Remove</button>
