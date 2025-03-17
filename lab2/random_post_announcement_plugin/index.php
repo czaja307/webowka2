@@ -58,7 +58,7 @@
                 let container = document.getElementById('announcements-container');
                 let newInput = document.createElement('div');
                 newInput.classList.add('announcement-item');
-                newInput.innerHTML = '<input type="text" name="rpa_announcements[]" style="width:80%;" placeholder="New Announcement">' +
+                newInput.innerHTML = '<input type="text" name="rpa_announcements[]" style="width:60%;" placeholder="New Announcement">' +
                                      '<input type="date" name="rpa_start_date[]" />' +
                                      '<input type="date" name="rpa_end_date[]" />' +
                                      '<button type="button" class="remove-announcement">Remove</button>';
