@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barbie Cafe</title>
+    <link rel="stylesheet" href="sass/main.css">
+</head>
+<body>
+<nav class="navbar">
+    <img src="public/logo.svg" alt="Barbie Cafe" width="115px">
+    <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">O nas</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Kontakt</a></li>
+    </ul>
+    <button class="menu-toggle">&#9776;</button>
+</nav>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+        document.querySelector('.navbar').classList.toggle('active')
+    })
+</script>
+
+</body>
+</html>

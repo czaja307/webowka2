@@ -1,0 +1,81 @@
+.navbar {
+  background-color: $white;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  .menu {
+    display: flex;
+    list-style: none;
+
+
+    li {
+      a{
+        color: $foreground_color;
+        padding: 10px;
+        text-decoration: none;
+        font-size: large;
+        transition: 0.3s ease;
+
+        &:hover {
+          color: $primary_color;
+        }
+
+      }
+    }
+
+  }
+
+
+  @include breakpoint(small) {
+    justify-content: space-between;
+    width: 85%;
+    .menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 60%;
+      padding: 10px;
+      margin: 0;
+      background-color: $primary_color;
+
+      li {
+        text-align: center;
+        padding: 10px;
+        a{
+          color: $white;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+            color: darken(white, 10%);
+          }
+
+        }
+      }
+    }
+
+    .menu-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-size: x-large;
+    }
+  }
+
+  &.active {
+    .menu {
+      display: flex;
+    }
+  }
+
+}
+.menu-toggle{
+  display: none;
+
+}
