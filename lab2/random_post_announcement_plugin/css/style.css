@@ -1,0 +1,21 @@
+.rpa-announcement {
+    background-color: #ffeb3b;
+    color: #333;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid #ff9800;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.announcement-item {
+    margin-bottom: 8px;
+}
+
+.remove-announcement {
+    margin-left: 8px; color: red; cursor: pointer;
+}
+
+button {
+    padding: 5px 10px;
+}
