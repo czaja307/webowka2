@@ -60,11 +60,20 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 5px;
 
+  @include breakpoint(small) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
   .gallery-item {
     width: 150px;
     height: 150px;
     cursor: pointer;
     position: relative;
+
+    @include breakpoint(small) {
+      width: 100px;
+      height: 100px;
+    }
 
     img{
       width: 100%;
@@ -113,4 +122,37 @@
     right:0;
   }
 
+}
+
+.flex-row-special {
+  @extend .flex-row;
+
+  @include breakpoint(small) {
+    .scroll{
+      max-height: 300px;
+    }
+  }
+}
+
+.style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 30px 30px 15px;
+  width: 100%;
+}
+
+button {
+  padding: 14px;
+  background: $primary_color;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  margin: 10px;
+  transition: 0.3s ease;
+
+  &:hover {
+    background: darken($primary_color, 60%);
+  }
 }

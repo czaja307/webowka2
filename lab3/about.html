@@ -16,9 +16,9 @@
     <button class="menu-toggle">&#9776;</button>
 </nav>
 <div class="content">
-    <h1>Zapraszamy do Barbie Cafe!</h1>
-    <div class="flex-row-special">
-        <img src="public/photo-cafe.webp" alt="" height="500px">
+    <h1>O nas</h1>
+    <div class="flex-row">
+    <img src="public/photo-cafe.webp" alt="" height="500px">
         <div class="scroll">
             <p>
                 Sprawdz nasze placówki stacjonarne i poznaj historię naszej kawiarnii. Organizujemy bankiety, bale i wesela.
@@ -26,54 +26,11 @@
             </p>
         </div>
     </div>
-    <p class="sub-title">Galeria</p>
 
-    <section class="gallery" id="gallery"></section>
-
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <button class="close-btn" id="close-btn">&times;</button>
-            <img src="" alt="" class="modal-img" id="modal-img"/>
-        </div>
-    </div>
 </div>
 
 <script>
 
-    const images = [
-        {src: 'public/img1.jpg'},
-        {src: 'public/img3.jpg'},
-        {src: 'public/img4.webp'},
-        {src: 'public/img5.jpg'},
-        {src: 'public/img6.jpg'},
-        {src: 'public/img7.jpeg'},
-        {src: 'public/img8.jpg'},
-    ]
-
-    galleryEl = document.getElementById('gallery')
-
-    images.forEach(image => {
-        const div = document.createElement('div')
-        div.classList.add('gallery-item')
-        div.setAttribute('data-full', image.src)
-
-        const img = document.createElement('img')
-        img.alt = image.alt
-        img.src = image.src
-
-        div.appendChild(img)
-        galleryEl.appendChild(div)
-
-        div.addEventListener('click', () => {
-            document.getElementById('modal-img').src = img.src
-            document.getElementById('modal').classList.add('active')
-        })
-    })
-
-
-    document.getElementById('close-btn').addEventListener('click', () => {
-        document.getElementById('modal').classList.remove('active')
-    })
 
     document.querySelector('.menu-toggle').addEventListener('click', function () {
         document.querySelector('.navbar').classList.toggle('active')
