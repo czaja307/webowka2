@@ -1,3 +1,4 @@
+
 .content {
   padding: 80px 30px 30px 15px;
 
@@ -65,14 +66,14 @@
   }
 
   .gallery-item {
-    width: 150px;
-    height: 150px;
+    width: $gallery-size-large;
+    height: $gallery-size-large;
     cursor: pointer;
     position: relative;
 
     @include breakpoint(small) {
-      width: 100px;
-      height: 100px;
+      width: $gallery-size-large - 50px;
+      height: $gallery-size-large - 50px;
     }
 
     img{
@@ -95,6 +96,9 @@
   display: none;
   align-items: center;
   justify-content: center;
+
+
+
 
    &.active {
      display: flex;
@@ -142,7 +146,7 @@
   width: 100%;
 }
 
-button {
+.basic-btn {
   padding: 14px;
   background: $primary_color;
   border: none;
