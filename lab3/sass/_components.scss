@@ -4,8 +4,12 @@
 
 }
 
-.flex-row {
+%flex {
   display: flex;
+}
+
+.flex-row {
+  @extend %flex;
   flex-direction: row;
   justify-content: space-between;
 
