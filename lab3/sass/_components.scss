@@ -69,6 +69,7 @@
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 
+
   .gallery-item {
     width: $gallery-size-large;
     height: $gallery-size-large;
@@ -100,9 +101,6 @@
   display: none;
   align-items: center;
   justify-content: center;
-
-
-
 
    &.active {
      display: flex;
