@@ -43,19 +43,19 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#lastTravels">Najnowsze podróże</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#picture">Obrazek</a>
         </li>
         <!-- Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">Dropdown</a>
+             aria-expanded="false">Dane kontaktowe</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#faq">Częste pytania</a>
+            <a class="dropdown-item" href="#my-map">Mapa</a>
+            <a class="dropdown-item" href="#contact">Skontaktuj się</a>
           </div>
         </li>
       </ul>
@@ -86,7 +86,7 @@
             <!-- Description -->
             <h4 class="text-white my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti consequuntu
               r.</h4>
-            <button type="button" class="btn btn-outline-light">Dowiedz się więcej<i class="fas fa-book ms-2"></i></button>
+            <button type="button" class="btn btn-hover-white">Dowiedz się więcej<i class="fas fa-book ms-2"></i></button>
           </div>
         </div>
       </div>
@@ -99,10 +99,36 @@
   <div class="container">
 
     <!--Section: LastTravels-->
-    <section id="lastTravels" class="text-center">
+    <section id="lastTravels" class="text-center" data-aos="fade-up">
       <!--Grid row-->
       <div class="row">
         <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="view overlay z-depth-1-half">
+            <img src="trip1.jpg" class="img-fluid" alt="">
+            <a href="#!">
+              <div class="mask rgba-blue-light"></div>
+            </a>
+          </div>
+          <h4 class="my-4 font-weight-bold">Podróż 1</h4>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="view overlay z-depth-1-half">
+            <img src="trip1.jpg" class="img-fluid" alt="">
+            <a href="#!">
+              <div class="mask rgba-blue-light"></div>
+            </a>
+          </div>
+          <h4 class="my-4 font-weight-bold">Podróż 1</h4>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.
+          </p>
+        </div>
         <div class="col-lg-4 col-md-12 mb-4">
           <div class="view overlay z-depth-1-half">
             <img src="trip1.jpg" class="img-fluid" alt="">
@@ -151,7 +177,7 @@
     <!--Section: Gallery-->
     <hr class="my-5">
     <!--Section: picture-->
-    <section id="picture" class="py-4">
+    <section id="picture" class="py-4" data-aos="fade-up">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-3">
@@ -167,7 +193,7 @@
     </section>
     <!--Section: picture-->
     <!--Section: quote-->
-    <section id="quote" class="py-4 bg-light">
+    <section id="quote" class="py-4 bg-light" data-aos="fade-up">
       <div class="container">
         <blockquote class="text-center blockquote">
           <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
@@ -178,7 +204,7 @@
     </section>
     <!--Section: quote-->
     <!--Section: employees-->
-    <section id="employees" class="py-4 bg-light">
+    <section id="employees" class="py-4 bg-light" data-aos="fade-up">
       <div class="container">
         <h3 class="mb-4 text-center">Zespol</h3>
         <div id="employees-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -265,7 +291,7 @@
     </section>
     <!--Section: employees-->
     <!--Section: chart-->
-    <section id="chart" class="py-4 bg-light">
+    <section id="chart" class="py-4 bg-light" data-aos="fade-up">
       <div class="container">
         <h3 class="mb-4 text-center">Kierunki podróży</h3>
         <canvas id="travel-chart" width="400" height="300"></canvas>
@@ -296,15 +322,16 @@
     <!--Section: faq-->
 
     <!--Section: Map-->
-    <section id="my-map" class="py-4">
-      <div class="container"></div>
+    <section id="my-map" class="py-4" data-aos="fade-up">
+      <div class="container align-items-center justify-items-center">
       <h2 class="mb-4 text-center">Znajdż nas</h2>
-      <div id ="map" style = "width:800px; height:600px;"></div>
+      <div id ="map" style="width:80%; height:600px; margin: 0 auto;"></div>
+      </div>
     </section>
     <!--Section: Map-->
     <hr class="my-5">
     <!--Section: Contact-->
-    <section id="contact " class="py-4" data-aos="fade-up">
+    <section id="contact" class="py-4" data-aos="fade-up">
       <h2 class="mb-4 text-center">Skontaktuj się!</h2>
       <form>
         <div class="mx-auto" style="max-width: 600px;">
