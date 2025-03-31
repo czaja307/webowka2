@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Material Design Bootstrap -->
@@ -90,7 +91,7 @@
 <!--Main layout-->
 <main class="mt-5">
   <div class="container">
-    <!--Section: LastTravels-->
+
     <!--Section: LastTravels-->
     <section id="lastTravels" class="text-center">
       <!--Grid row-->
@@ -143,8 +144,112 @@
     </section>
     <!--Section: Gallery-->
     <hr class="my-5">
+    <!--Section: picture-->
+    <section id="picture" class="py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <h3>Obrazek</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+              am, aperiam minima assumenda deleniti hic.</p>
+          </div>
+          <div class="col-md-9">
+            <img src="trip1.jpg" alt="Opis" class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: picture-->
+    <!--Section: quote-->
+    <section id="quote" class="py-4 bg-light">
+      <div class="container">
+        <blockquote class="text-center blockquote">
+          <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.</p>
+          <footer class="blockquote-footer">Autor cytatu</footer>
+        </blockquote>
+      </div>
+    </section>
+    <!--Section: quote-->
+    <!--Section: employees-->
+    <section id="employees" class="py-4 bg-light">
+      <div class="container">
+        <h3 class="mb-4 text-center">Zespol</h3>
+        <div id="employees-carousel" class="carousel slide" data-bs-ride="carousel">
+        </div>
+        <blockquote class="text-center blockquote">
+          <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.</p>
+          <footer class="blockquote-footer">Autor cytatu</footer>
+        </blockquote>
+      </div>
+    </section>
+    <!--Section: employees-->
+    <!--Section: chart-->
+    <section id="chart" class="py-4 bg-light">
+      <div class="container">
+        <h3 class="mb-4 text-center">Kierunki podróży</h3>
+        <canvas id="travel-chart" width="400" height="300"></canvas>
+      </div>
+    </section>
+    <!--Section: chart-->
+    <!--Section: faq-->
+    <section id="faq" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h3 class="mb-4 text-center">FAQ</h3>
+        <div id="faq-accordion" class="accordion">
+          <div class="accordion-item">
+            <p class="accordion-header" id="heading-one">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                Jak zarezerwowac podroz?
+              </button>
+            </p>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faq-accordion">
+              <div class="accordion-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+                am, aperiam minima assumenda deleniti hic.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: faq-->
+
+    <!--Section: Map-->
+    <section id="map" class="py-4">
+      <div class="container"></div>
+      <h2 class="mb-4 text-center">Znajdż nas</h2>
+      <div class="map-responsive">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!2m..." width="100%" height="450" style="border:0;"
+                allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </section>
+    <!--Section: Map-->
+    <hr class="my-5">
     <!--Section: Contact-->
-    <section id="contact">
+    <section id="contact " class="py-4" data-aos="fade-up">
+      <h2 class="mb-4 text-center">Skontaktuj się!</h2>
+      <form>
+        <div class="mx-auto" style="max-width: 600px;">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input type="text" class="form-control" placeholder="Kasia Kowalska" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="text" class="form-control" placeholder="Kasia.Kowalska@example.com" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Treść..." required></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Prześlij</button>
+          </div>
+        </div>
+      </form>
+
     </section>
     <!--Section: Contact-->
   </div>
@@ -161,7 +266,36 @@
 <!--Footer-->
 
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script>
+  const ctx = document.getElementById('travel-chart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Hiszpania', 'Polska', 'Wlochy'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+  });
+</script>
 <script
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.umd.min.js"
