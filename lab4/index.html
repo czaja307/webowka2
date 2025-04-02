@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.min.css" rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<!--Main Navigation-->
+<header>
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>
+    </button>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#lastTravels">Najnowsze podróże</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#picture">Obrazek</a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">Dane kontaktowe</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#faq">Częste pytania</a>
+            <a class="dropdown-item" href="#my-map">Mapa</a>
+            <a class="dropdown-item" href="#contact">Skontaktuj się</a>
+          </div>
+        </li>
+      </ul>
+      <!-- Links -->
+      <form class="form-inline">
+        <div class="md-form my-0">
+          <input class="form-control me-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </div>
+      </form>
+    </div>
+    <!-- Collapsible content -->
+  </div>
+</nav>
+<!--/.Navbar-->
+</header>
+<!--Main Navigation-->
+
+  <!--Mask-->
+  <div id="intro" class="view">
+    <div class="mask" style="background-color: rgba(0 , 0, 0, 0.6)">
+      <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+        <div class="row d-flex justify-content-center text-center">
+          <div class="col-md-10">
+            <!-- Heading -->
+            <h2 class="display-4 fw-bold text-white pt-5 mb-2">Podróżowanie</h2>
+            <!-- Divider -->
+            <hr class="hr-light">
+            <!-- Description -->
+            <h4 class="text-white my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti consequuntu
+              r.</h4>
+            <button type="button" class="btn btn-hover-white">Dowiedz się więcej<i class="fas fa-book ms-2"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.Mask-->
+
+<!--Main layout-->
+<main class="mt-5">
+  <div class="container">
+
+    <!--Section: LastTravels-->
+    <section id="lastTravels" class="text-center" data-aos="fade-up">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="view overlay z-depth-1-half">
+            <img src="trip1.jpg" class="img-fluid" alt="">
+            <a href="#!">
+              <div class="mask rgba-blue-light"></div>
+            </a>
+          </div>
+          <h4 class="my-4 font-weight-bold">Podróż 1</h4>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="view overlay z-depth-1-half">
+            <img src="trip1.jpg" class="img-fluid" alt="">
+            <a href="#!">
+              <div class="mask rgba-blue-light"></div>
+            </a>
+          </div>
+          <h4 class="my-4 font-weight-bold">Podróż 1</h4>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="view overlay z-depth-1-half">
+            <img src="trip1.jpg" class="img-fluid" alt="">
+            <a href="#!">
+              <div class="mask rgba-blue-light"></div>
+            </a>
+          </div>
+          <h4 class="my-4 font-weight-bold">Podróż 1</h4>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.
+          </p>
+        </div>
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </section>
+    <!--Section: LastTravels-->
+    <hr class="my-5">
+    <!--Section: Gallery-->
+    <section id="gallery">
+    </section>
+    <!--Section: Gallery-->
+    <hr class="my-5">
+    <!--Section: picture-->
+    <section id="picture" class="py-4" data-aos="fade-up">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <h3>Obrazek</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+              am, aperiam minima assumenda deleniti hic.</p>
+          </div>
+          <div class="col-md-9">
+            <img src="trip1.jpg" alt="Opis" class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: picture-->
+    <!--Section: quote-->
+    <section id="quote" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <blockquote class="text-center blockquote">
+          <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+            am, aperiam minima assumenda deleniti hic.</p>
+          <footer class="blockquote-footer">Autor cytatu</footer>
+        </blockquote>
+      </div>
+    </section>
+    <!--Section: quote-->
+    <!--Section: employees-->
+    <section id="employees" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h3 class="mb-4 text-center">Zespol</h3>
+        <div id="employees-carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp1.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Kasia Kowlska</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp3.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Kazik Kowlski</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp4.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Jakub Kowlski</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp5.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Kasia Kowlska</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp6.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Kazik Kowlski</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="emp7.jpg" class="card-img-top" alt="pracownik 1">
+                    <div class="card-body">
+                      <h5 class="card-title">Jakub Kowlski</h5>
+                      <p class="card-text">Specjslista ds. Marketingu</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#employees-carousel"
+                    data-bs-slide="prev">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+              </svg>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#employees-carousel"
+                    data-bs-slide="next">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+              </svg>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: employees-->
+    <!--Section: chart-->
+    <section id="chart" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h3 class="mb-4 text-center">Kierunki podróży</h3>
+        <canvas id="travel-chart" width="400" height="300"></canvas>
+      </div>
+    </section>
+    <!--Section: chart-->
+    <!--Section: faq-->
+    <section id="faq" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h3 class="mb-4 text-center">FAQ</h3>
+        <div id="faq-accordion" class="accordion">
+          <div class="accordion-item">
+            <p class="accordion-header" id="heading-one">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                Jak zarezerwowac podroz?
+              </button>
+            </p>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faq-accordion">
+              <div class="accordion-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores n
+                am, aperiam minima assumenda deleniti hic.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Section: faq-->
+
+    <!--Section: Map-->
+    <section id="my-map" class="py-4" data-aos="fade-up">
+      <div class="container align-items-center justify-items-center">
+      <h2 class="mb-4 text-center">Znajdż nas</h2>
+      <div id ="map" style="width:80%; height:600px; margin: 0 auto;"></div>
+      </div>
+    </section>
+    <!--Section: Map-->
+    <hr class="my-5">
+    <!--Section: Contact-->
+    <section id="contact" class="py-4" data-aos="fade-up">
+      <h2 class="mb-4 text-center">Skontaktuj się!</h2>
+      <form>
+        <div class="mx-auto" style="max-width: 600px;">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input type="text" class="form-control" placeholder="Kasia Kowalska" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="text" class="form-control" placeholder="Kasia.Kowalska@example.com" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Treść..." required></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Prześlij</button>
+          </div>
+        </div>
+      </form>
+
+    </section>
+    <!--Section: Contact-->
+  </div>
+</main>
+<!--Main layout-->
+
+
+
+
+
+<!--Footer-->
+<footer>
+</footer>
+<!--Footer-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('travel-chart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Hiszpania', 'Polska', 'Wlochy'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+  });
+</script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.umd.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<script>
+
+  // Creating a map object
+  var map = L.map('map').setView([51.505, -0.09], 13);
+
+  // Creating a Layer object
+  var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+  // Adding layer to the map
+  map.addLayer(layer);
+  var marker = L.marker([51.5, -0.09]).addTo(map);
+</script>
+</body>
+</html>
