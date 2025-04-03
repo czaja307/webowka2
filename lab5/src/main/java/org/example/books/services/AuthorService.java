@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,8 +21,8 @@ public class AuthorService implements ICRUDService<Author> {
     }
 
     @Override
-    public Optional<Author> getById(long id) {
-        return authors.stream().filter(author -> author.getId() == id).findFirst();
+    public Optional<Author> getById(Long id) {
+        return authors.stream().filter(author -> Objects.equals(author.getId(), id)).findFirst();
     }
 
     @Override
@@ -30,17 +31,17 @@ public class AuthorService implements ICRUDService<Author> {
     }
 
     @Override
-    public Optional<Author> update(long id, Author newAuthor) {
+    public Optional<Author> update(Long id, Author newAuthor) {
         return getById(id).map(author -> {
-            author.setName(newAuthor.getName());
-            author.setSurname(newAuthor.getSurname());
+            author.setFirstName(newAuthor.getFirstName());
+            author.setLastName(newAuthor.getLastName());
             author.setBirthDate(newAuthor.getBirthDate());
             return author;
         });
     }
 
     @Override
-    public boolean delete(long id) {
-        return authors.removeIf(author -> author.getId() == id);
+    public Boolean delete(Long id) {
+        return authors.removeIf(author -> Objects.equals(author.getId(), id));
     }
 }

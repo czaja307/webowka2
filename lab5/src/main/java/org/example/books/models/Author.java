@@ -1,13 +1,29 @@
 package org.example.books.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
 public class Author {
-    private long id;
-    private String name;
-    private String surname;
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String firstName;
+
+    private String lastName;
+
     private String birthDate;
+
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 }

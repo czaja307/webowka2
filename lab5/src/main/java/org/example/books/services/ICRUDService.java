@@ -6,11 +6,11 @@ import java.util.Optional;
 public interface ICRUDService<T> {
     T create(T t);
 
-    Optional<T> getById(long id);
+    Optional<T> getById(Long id);
 
     List<T> getAll();
 
-    Optional<T> update(long id, T t);
+    Optional<T> update(Long id, T t);
 
-    boolean delete(long id);
+    Boolean delete(Long id);
 }

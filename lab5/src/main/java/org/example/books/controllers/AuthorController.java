@@ -20,7 +20,7 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Author> getAuthor(@PathVariable long id) {
+    public Optional<Author> getAuthor(@PathVariable Long id) {
         return authorService.getById(id);
     }
 
@@ -30,12 +30,12 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Author> updateAuthor(@PathVariable long id, @RequestBody Author author) {
+    public Optional<Author> updateAuthor(@PathVariable Long id, @RequestBody Author author) {
         return authorService.update(id, author);
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteAuthor(@PathVariable long id) {
+    public Boolean deleteAuthor(@PathVariable Long id) {
         return authorService.delete(id);
     }
 }
