@@ -23,5 +23,6 @@ public class BooksApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         databaseSeeder.seedAuthors();
         databaseSeeder.seedBooks();
+        databaseSeeder.seedReaders();
     }
 }

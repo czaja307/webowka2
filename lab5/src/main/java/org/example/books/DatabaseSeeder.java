@@ -2,8 +2,10 @@ package org.example.books;
 
 import org.example.books.models.Author;
 import org.example.books.models.Book;
+import org.example.books.models.Reader;
 import org.example.books.repositories.AuthorRepository;
 import org.example.books.repositories.BookRepository;
+import org.example.books.repositories.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,9 @@ public class DatabaseSeeder {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private ReaderRepository readerRepository;
 
     public void seedAuthors() {
         Author author1 = new Author();
@@ -81,5 +86,21 @@ public class DatabaseSeeder {
 
             bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5, book6));
         }
+    }
+
+    public void seedReaders() {
+        Reader reader1 = new Reader();
+        reader1.setFirstName("Michael");
+        reader1.setLastName("Brown");
+
+        Reader reader2 = new Reader();
+        reader2.setFirstName("Sarah");
+        reader2.setLastName("Davis");
+
+        Reader reader3 = new Reader();
+        reader3.setFirstName("David");
+        reader3.setLastName("Wilson");
+
+        readerRepository.saveAll(Arrays.asList(reader1, reader2, reader3));
     }
 }
