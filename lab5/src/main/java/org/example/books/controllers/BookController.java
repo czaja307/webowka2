@@ -1,14 +1,13 @@
 package org.example.books.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.books.dtos.BookRequestDTO;
 import org.example.books.models.Book;
 import org.example.books.services.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
-// TODO: what the fuck is the autowired!??!??!
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -17,8 +16,8 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookService.create(book);
+    public Book createBook(@RequestBody BookRequestDTO bookRequestDTO) {
+        return bookService.create(bookRequestDTO);
     }
 
     @GetMapping("/{id}")
@@ -32,12 +31,12 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
-        return bookService.update(id, book);
+    public Book updateBook(@PathVariable Long id, @RequestBody BookRequestDTO bookRequestDTO) {
+        return bookService.update(id, bookRequestDTO);
     }
 
     @DeleteMapping("/{id}")
-    public Boolean deleteBook(@PathVariable Long id) {
-        return bookService.delete(id);
+    public void deleteBook(@PathVariable Long id) {
+        bookService.delete(id);
     }
 }

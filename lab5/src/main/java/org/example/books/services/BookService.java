@@ -1,47 +1,67 @@
 package org.example.books.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.books.dtos.BookRequestDTO;
+import org.example.books.models.Author;
 import org.example.books.models.Book;
+import org.example.books.repositories.AuthorRepository;
+import org.example.books.repositories.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class BookService implements ICRUDService<Book> {
-    private final List<Book> books = new ArrayList<>();
+public class BookService {
+    @Autowired
+    BookRepository bookRepo;
 
+    @Autowired
+    AuthorRepository authorRepo;
 
-    @Override
-    public Book create(Book book) {
-        books.add(book);
-        return book;
+    public Book create(BookRequestDTO bookRequestDTO) {
+        Book book = new Book();
+        book.setTitle(bookRequestDTO.getTitle());
+        book.setPages(bookRequestDTO.getPages());
+        book.setIsAvailable(bookRequestDTO.getIsAvailable());
+
+        if (bookRequestDTO.getAuthorId() != null) {
+            Optional<Author> author = authorRepo.findById(bookRequestDTO.getAuthorId());
+            author.ifPresent(book::setAuthor);
+        }
+
+        return bookRepo.save(book);
     }
 
-    @Override
+    public Book update(Long id, BookRequestDTO bookRequestDTO) {
+        Optional<Book> existingBook = bookRepo.findById(id);
+        if (existingBook.isPresent()) {
+            Book book = existingBook.get();
+            book.setTitle(bookRequestDTO.getTitle());
+            book.setPages(bookRequestDTO.getPages());
+            book.setIsAvailable(bookRequestDTO.getIsAvailable());
+
+            if (bookRequestDTO.getAuthorId() != null) {
+                Optional<Author> author = authorRepo.findById(bookRequestDTO.getAuthorId());
+                author.ifPresent(book::setAuthor);
+            }
+
+            return bookRepo.save(book);
+        }
+        return null;
+    }
+
     public Optional<Book> getById(Long id) {
-        return books.stream().filter(book -> Objects.equals(book.getId(), id)).findFirst();
+        return bookRepo.findById(id);
     }
 
-    @Override
     public List<Book> getAll() {
-        return books;
+        return bookRepo.findAll();
     }
 
-    @Override
-    public Optional<Book> update(Long id, Book newBook) {
-        return getById(id).map(book -> {
-            book.setTitle(newBook.getTitle());
-            book.setAuthor(newBook.getAuthor());
-            return book;
-        });
-    }
-
-    @Override
-    public Boolean delete(Long id) {
-        return books.removeIf(book -> Objects.equals(book.getId(), id));
+    public void delete(Long id) {
+        bookRepo.deleteById(id);
     }
 }
