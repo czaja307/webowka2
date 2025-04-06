@@ -1,9 +1,11 @@
 package org.example.books.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.books.exceptions.APIException;
 import org.example.books.models.Author;
 import org.example.books.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class AuthorService {
         return authorRepo.save(author);
     }
 
-    public Optional<Author> getById(Long id) {
-        return authorRepo.findById(id);
+    public Author getById(Long id) {
+        return authorRepo.findById(id)
+                .orElseThrow(() -> new APIException("Author not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     public List<Author> getAll() {
@@ -30,19 +33,23 @@ public class AuthorService {
 
     public Author update(Long id, Author author) {
         Optional<Author> existingAuthor = authorRepo.findById(id);
-        if (existingAuthor.isPresent()) {
-            Author updatedAuthor = existingAuthor.get();
-            updatedAuthor.setFirstName(author.getFirstName());
-            updatedAuthor.setLastName(author.getLastName());
-            updatedAuthor.setBirthDate(author.getBirthDate());
-            return authorRepo.save(updatedAuthor);
+        if (existingAuthor.isEmpty()) {
+            throw new APIException("Author not found with id: " + id, HttpStatus.NOT_FOUND);
         }
-        return null;
+        Author updatedAuthor = existingAuthor.get();
+        updatedAuthor.setFirstName(author.getFirstName());
+        updatedAuthor.setLastName(author.getLastName());
+        updatedAuthor.setBirthDate(author.getBirthDate());
+        return authorRepo.save(updatedAuthor);
     }
 
     public void delete(Long id) {
-        if (authorRepo.existsById(id) && !authorRepo.findById(id).get().getBooks().isEmpty()) {
-            throw new IllegalStateException("Cannot delete author with assigned books.");
+        Optional<Author> existingAuthor = authorRepo.findById(id);
+        if (existingAuthor.isEmpty()) {
+            throw new APIException("Author not found with id: " + id, HttpStatus.NOT_FOUND);
+        }
+        if (!existingAuthor.get().getBooks().isEmpty()) {
+            throw new APIException("Cannot delete author with assigned books.", HttpStatus.BAD_REQUEST);
         }
         authorRepo.deleteById(id);
     }

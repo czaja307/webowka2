@@ -1,9 +1,11 @@
 package org.example.books.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.books.exceptions.APIException;
 import org.example.books.models.Reader;
 import org.example.books.repositories.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,9 @@ public class ReaderService {
         return readerRepo.save(reader);
     }
 
-    public Optional<Reader> getReaderById(Long id) {
-        return readerRepo.findById(id);
+    public Reader getReaderById(Long id) {
+        return readerRepo.findById(id)
+                .orElseThrow(() -> new APIException("Reader not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     public List<Reader> getAllReaders() {
@@ -31,18 +34,22 @@ public class ReaderService {
 
     public Reader updateReader(Long id, Reader reader) {
         Optional<Reader> existingReader = readerRepo.findById(id);
-        if (existingReader.isPresent()) {
-            Reader updatedReader = existingReader.get();
-            updatedReader.setFirstName(reader.getFirstName());
-            updatedReader.setLastName(reader.getLastName());
-            return readerRepo.save(updatedReader);
+        if (existingReader.isEmpty()) {
+            throw new APIException("Reader not found with id: " + id, HttpStatus.NOT_FOUND);
         }
-        return null;
+        Reader updatedReader = existingReader.get();
+        updatedReader.setFirstName(reader.getFirstName());
+        updatedReader.setLastName(reader.getLastName());
+        return readerRepo.save(updatedReader);
     }
 
     public void deleteReader(Long id) {
-        if (readerRepo.existsById(id) && !readerRepo.findById(id).get().getRentals().isEmpty()) {
-            throw new IllegalStateException("Cannot delete reader with active rentals.");
+        Optional<Reader> existingReader = readerRepo.findById(id);
+        if (existingReader.isEmpty()) {
+            throw new APIException("Reader not found with id: " + id, HttpStatus.NOT_FOUND);
+        }
+        if (!existingReader.get().getRentals().isEmpty()) {
+            throw new APIException("Reader has active rentals and cannot be deleted.", HttpStatus.BAD_REQUEST);
         }
         readerRepo.deleteById(id);
     }

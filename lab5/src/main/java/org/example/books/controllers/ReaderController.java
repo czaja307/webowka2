@@ -6,7 +6,6 @@ import org.example.books.services.ReaderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/readers")
@@ -21,7 +20,7 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Reader> getReader(@PathVariable Long id) {
+    public Reader getReader(@PathVariable Long id) {
         return readerService.getReaderById(id);
     }
 

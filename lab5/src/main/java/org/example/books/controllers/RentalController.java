@@ -20,9 +20,9 @@ public class RentalController {
         return rentalService.rentBook(bookId, readerId);
     }
 
-    @PostMapping("/return")
-    public Rental returnBook(@RequestParam Long rentalId) {
-        return rentalService.returnBook(rentalId);
+    @PostMapping("/return/{id}")
+    public Rental returnBook(@PathVariable Long id) {
+        return rentalService.returnBook(id);
     }
 
     @GetMapping
@@ -36,7 +36,7 @@ public class RentalController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Rental> getRentalById(@PathVariable Long id) {
+    public Rental getRentalById(@PathVariable Long id) {
         return rentalService.getRentalById(id);
     }
 }
