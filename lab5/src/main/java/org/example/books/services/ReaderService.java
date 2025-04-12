@@ -5,6 +5,8 @@ import org.example.books.exceptions.APIException;
 import org.example.books.models.Reader;
 import org.example.books.repositories.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,8 @@ public class ReaderService {
                 .orElseThrow(() -> new APIException("Reader not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    public List<Reader> getAllReaders() {
-        return readerRepo.findAll();
+    public Page<Reader> getAllReaders(Pageable pageable) {
+        return readerRepo.findAll(pageable);
     }
 
     public Reader updateReader(Long id, Reader reader) {

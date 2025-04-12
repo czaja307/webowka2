@@ -3,6 +3,9 @@ package org.example.books.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.books.models.Reader;
 import org.example.books.services.ReaderService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +28,11 @@ public class ReaderController {
     }
 
     @GetMapping
-    public List<Reader> getAllReaders() {
-        return readerService.getAllReaders();
+    public Page<Reader> getAllReaders(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return readerService.getAllReaders(pageable);
     }
 
     @PutMapping("/{id}")

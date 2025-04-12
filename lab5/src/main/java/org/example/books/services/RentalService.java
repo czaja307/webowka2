@@ -9,6 +9,8 @@ import org.example.books.repositories.BookRepository;
 import org.example.books.repositories.ReaderRepository;
 import org.example.books.repositories.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -67,12 +69,16 @@ public class RentalService {
         return rentalRepo.save(existingRental);
     }
 
-    public List<Rental> getAllRentals() {
-        return rentalRepo.findAll();
+    public Page<Rental> getAllRentals(Pageable pageable) {
+        return rentalRepo.findAll(pageable);
     }
 
-    public List<Rental> getActiveRentals() {
-        return rentalRepo.findAll().stream().filter(rental -> rental.getReturnDate() == null).collect(Collectors.toList());
+    public Page<Rental> getActiveRentals(Pageable pageable) {
+        Page<Rental> rentals = rentalRepo.findAll(pageable);
+        List<Rental> activeRentals = rentals.getContent().stream()
+                .filter(rental -> rental.getReturnDate() == null)
+                .collect(Collectors.toList());
+        return new org.springframework.data.domain.PageImpl<>(activeRentals, pageable, rentals.getTotalElements());
     }
 
     public Rental getRentalById(Long id) {

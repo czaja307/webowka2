@@ -3,6 +3,9 @@ package org.example.books.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.books.models.Rental;
 import org.example.books.services.RentalService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,13 +29,19 @@ public class RentalController {
     }
 
     @GetMapping
-    public List<Rental> getAllRentals() {
-        return rentalService.getAllRentals();
+    public Page<Rental> getAllRentals(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return rentalService.getAllRentals(pageable);
     }
 
     @GetMapping("/active")
-    public List<Rental> getActiveRentals() {
-        return rentalService.getActiveRentals();
+    public Page<Rental> getActiveRentals(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return rentalService.getActiveRentals(pageable);
     }
 
     @GetMapping("/{id}")

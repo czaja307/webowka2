@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.books.dtos.BookRequestDTO;
 import org.example.books.models.Book;
 import org.example.books.services.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +29,11 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAll();
+    public Page<Book> getAllBooks(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return bookService.getAll(pageable);
     }
 
     @PutMapping("/{id}")

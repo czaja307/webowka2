@@ -5,6 +5,8 @@ import org.example.books.exceptions.APIException;
 import org.example.books.models.Author;
 import org.example.books.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,8 @@ public class AuthorService {
                 .orElseThrow(() -> new APIException("Author not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    public List<Author> getAll() {
-        return authorRepo.findAll();
+    public Page<Author> getAll(Pageable pageable) {
+        return authorRepo.findAll(pageable);
     }
 
     public Author update(Long id, Author author) {
