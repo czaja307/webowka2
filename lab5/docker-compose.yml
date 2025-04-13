@@ -6,8 +6,8 @@ services:
     container_name: lab5_db
     environment:
       POSTGRES_DB: lab5
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: apoloniaabramowicz
+      POSTGRES_PASSWORD: stonka
 #    ports:
 #      - "5432:5432"
     volumes:
