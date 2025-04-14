@@ -139,6 +139,10 @@ const startEditing = (author: Book) => {
 };
 
 const saveAuthor = async (isBeingAdded?: boolean) => {
+  if (!currentAuthor.value.firstName || !currentAuthor.value.lastName || !currentAuthor.value.birthDate) {
+    alert("Please fill in all fields");
+    return;
+  }
   await updateMutation.mutateAsync(
       {
         method: isBeingAdded ? "POST" : "PUT",

@@ -6,15 +6,7 @@ import {ArrowLeftIcon, ArrowRightIcon} from "@radix-icons/vue";
 import {Input} from "@/components/ui/input";
 import {Card, CardContent} from "@/components/ui/card";
 import {Checkbox} from "@/components/ui/checkbox";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger,} from '@/components/ui/dialog'
 
 interface Book {
   id?: string
@@ -133,7 +125,9 @@ const updateMutation = useMutation({
       body: JSON.stringify(updatedData),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorResponse = await response.text();
+      console.log(errorResponse)
+      throw new Error(errorResponse || 'Network response was not ok');
     }
     return response.json() as Promise<Book>;
   },
@@ -168,7 +162,10 @@ const startEditing = (book: Book) => {
 };
 
 const saveBook = async (isBeingAdded?: boolean) => {
-    console.log("book_c", currentBook)
+  if (!currentBook.value.title || !currentBook.value.authorId || !currentBook.value.pages) {
+    alert("Please fill in all fields");
+    return;
+  }
     await updateMutation.mutateAsync(
         {
           method: isBeingAdded ? "POST" : "PUT",
@@ -220,12 +217,14 @@ const cancelEditing = () => {
           </DialogHeader>
           <Card class="sm:p-4 p-1">
             <CardContent class="flex flex-col gap-4">
+              <form>
               <div class="justify-start flex flex-col">
                 <label for="title" class="text-sm text-gray-600">Title</label>
                 <Input
                     v-model="currentBook.title"
                     type="text"
                     id="title"
+                    required
                 />
               </div>
               <div class="justify-start flex flex-col">
@@ -234,6 +233,7 @@ const cancelEditing = () => {
                     v-model="currentBook.pages"
                     type="number"
                     id="pages"
+                    required
                 />
               </div>
               <div class="justify-start flex flex-col">
@@ -243,6 +243,7 @@ const cancelEditing = () => {
                       v-model="currentBook.authorId"
                       id="authorId"
                       class="border border-gray-300 rounded-md p-2"
+                      required
                   >
                     <option disabled value="">Select author</option>
                     <option v-for="author in authors" :key="author.id" :value="author.id">
@@ -253,6 +254,7 @@ const cancelEditing = () => {
                 <Button
                     class="mt-2"
                     @click="saveBook(true)"
+                    type="submit"
                 >
                   Save
                 </Button>
@@ -266,6 +268,7 @@ const cancelEditing = () => {
                   </Button>
                 </DialogClose>
               </div>
+              </form>
             </CardContent>
           </Card>
         </DialogContent>

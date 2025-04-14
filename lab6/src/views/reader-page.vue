@@ -66,12 +66,17 @@ const deleteMutation = useMutation({
       method: 'DELETE',
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorResponse = await response.text();
+      console.log(errorResponse)
+      throw new Error(errorResponse || 'Network response was not ok');
     }
     return id;
   },
   onSuccess: (id) => {
     queryClient.invalidateQueries({queryKey: ['readers']});
+  },
+  onError: (error: Error) => {
+    alert(error.message);
   },
 });
 
@@ -130,6 +135,10 @@ const startEditing = (reader: Reader) => {
 };
 
 const saveReader = async (isBeingAdded?: boolean) => {
+  if (!currentReader.value.firstName || !currentReader.value.lastName) {
+    alert("Please fill in all fields");
+    return;
+  }
   await updateMutation.mutateAsync(
       {
         method: isBeingAdded ? "POST" : "PUT",

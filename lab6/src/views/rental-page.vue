@@ -4,8 +4,6 @@ import {useMutation, useQuery, useQueryClient} from "@tanstack/vue-query";
 import {Button} from "@/components/ui/button";
 import {ArrowLeftIcon, ArrowRightIcon} from "@radix-icons/vue";
 import {Input} from "@/components/ui/input";
-import {Card, CardContent} from "@/components/ui/card";
-import {Checkbox} from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogClose,
@@ -145,24 +143,6 @@ const {data, error, isLoading, isError} = useQuery({
 
 const rentals = computed(() => data.value ? data.value.content : [])
 
-const deleteMutation = useMutation({
-  mutationFn: async (id: string) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/rentals/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return id;
-  },
-  onSuccess: (id) => {
-    queryClient.invalidateQueries({queryKey: ['rentals']});
-  },
-});
-
-const deleteRental = async (id: string) => {
-  await deleteMutation.mutateAsync(id);
-};
 
 const updateMutation = useMutation({
   mutationFn: async ({bookId, readerId}: { bookId: string, readerId: string }) => {
@@ -173,12 +153,17 @@ const updateMutation = useMutation({
       },
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorResponse = await response.text();
+      console.log(errorResponse)
+      throw new Error(errorResponse || 'Network response was not ok');
     }
     return response.json() as Promise<Book>;
   },
   onSuccess: () => {
     queryClient.invalidateQueries({queryKey: queryKey.value});
+  },
+  onError: (error: Error) => {
+    alert(error.message);
   },
 });
 
@@ -191,12 +176,17 @@ const retMutation = useMutation({
       },
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorResponse = await response.text();
+      console.log(errorResponse)
+      throw new Error(errorResponse || 'Network response was not ok');
     }
     return response.json() as Promise<Book>;
   },
   onSuccess: () => {
     queryClient.invalidateQueries({queryKey: queryKey.value});
+  },
+  onError: (error: Error) => {
+    alert(error.message);
   },
 });
 
@@ -221,6 +211,10 @@ const prevPage = () => {
 
 
 const saveRental = async () => {
+  if (!bookId.value || !readerId.value) {
+    alert("Please fill in all fields");
+    return;
+  }
   await updateMutation.mutateAsync(
       {
         bookId: bookId.value,
@@ -355,11 +349,6 @@ const saveRental = async () => {
                   >
                     Return
                   </Button>
-                  <Button
-                      class="mt-2"
-                      @click="deleteRental(rental.id)"
-                      variant="destructive"
-                  >Delete</Button>
                 </div>
               </CardContent>
             </Card>
