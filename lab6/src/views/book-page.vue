@@ -6,6 +6,15 @@ import {ArrowLeftIcon, ArrowRightIcon} from "@radix-icons/vue";
 import {Input} from "@/components/ui/input";
 import {Card, CardContent} from "@/components/ui/card";
 import {Checkbox} from "@/components/ui/checkbox";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 interface Book {
   id?: string
@@ -110,9 +119,14 @@ const deleteBook = async (id: string) => {
 };
 
 const updateMutation = useMutation({
-  mutationFn: async ({id, updatedData}: { id: string, updatedData: Partial<Book> }) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${id}`, {
-      method: 'PUT',
+  mutationFn: async ({method, id, updatedData}: { method: "PUT" | "POST", id: string | null, updatedData: Partial<Book> }) => {
+    let endpoint = `${import.meta.env.VITE_API_URL}/books/${id}`;
+    if (method === "POST") {
+      console.log("kkkk")
+      endpoint = `${import.meta.env.VITE_API_URL}/books`;
+    }
+    const response = await fetch(endpoint, {
+      method: method,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -153,11 +167,11 @@ const startEditing = (book: Book) => {
   };
 };
 
-const saveBook = async () => {
-  if (editingId.value) {
+const saveBook = async (isBeingAdded?: boolean) => {
     console.log("book_c", currentBook)
     await updateMutation.mutateAsync(
         {
+          method: isBeingAdded ? "POST" : "PUT",
           id: editingId.value,
           updatedData: {
             title: currentBook.value.title,
@@ -166,13 +180,27 @@ const saveBook = async () => {
           }
         });
     editingId.value = null;
-    // currentBook.value = null;
-  }
+    currentBook.value = {
+      id: '',
+      title: '',
+      isAvailable: false,
+      author: null,
+      authorId: 0,
+      pages: 0,
+    };
 };
+
 
 const cancelEditing = () => {
   editingId.value = null;
-  currentBook.value = null;
+  currentBook.value = {
+    id: '',
+    title: '',
+    isAvailable: false,
+    author: null,
+    authorId: 0,
+    pages: 0,
+  };
 };
 
 </script>
@@ -180,6 +208,70 @@ const cancelEditing = () => {
 
 <template>
   <div class="flex items-center h-screen flex-col gap-10 p-4">
+    <div class="flex flex-row w-full - justify-between">
+      <h1 class="font-bold text-xl">Books</h1>
+      <Dialog>
+        <DialogTrigger as-child>
+          <Button>Add</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add a new book</DialogTitle>
+          </DialogHeader>
+          <Card class="sm:p-4 p-1">
+            <CardContent class="flex flex-col gap-4">
+              <div class="justify-start flex flex-col">
+                <label for="title" class="text-sm text-gray-600">Title</label>
+                <Input
+                    v-model="currentBook.title"
+                    type="text"
+                    id="title"
+                />
+              </div>
+              <div class="justify-start flex flex-col">
+                <label for="pages" class="text-sm text-gray-600">Pages</label>
+                <Input
+                    v-model="currentBook.pages"
+                    type="number"
+                    id="pages"
+                />
+              </div>
+              <div class="justify-start flex flex-col">
+                <label for="title" class="text-sm text-gray-600">Author</label>
+                <div>
+                  <select
+                      v-model="currentBook.authorId"
+                      id="authorId"
+                      class="border border-gray-300 rounded-md p-2"
+                  >
+                    <option disabled value="">Select author</option>
+                    <option v-for="author in authors" :key="author.id" :value="author.id">
+                      {{ author.firstName }} {{ author.lastName }}
+                    </option>
+                  </select>
+                </div>
+                <Button
+                    class="mt-2"
+                    @click="saveBook(true)"
+                >
+                  Save
+                </Button>
+                <DialogClose as-child>
+                  <Button
+                      variant="outline"
+                      class="mt-2"
+                      @click="cancelEditing"
+                  >
+                    Cancel
+                  </Button>
+                </DialogClose>
+              </div>
+            </CardContent>
+          </Card>
+        </DialogContent>
+      </Dialog>
+    </div>
+
     <div v-if="isLoading || authorsLoading">
       Loading...
     </div>
@@ -270,7 +362,7 @@ const cancelEditing = () => {
                   <Button
                       v-if="editingId === book.id"
                       class="mt-2"
-                      @click="saveBook"
+                      @click="saveBook(false)"
                       >
                     Save
                   </Button>
@@ -303,25 +395,6 @@ const cancelEditing = () => {
       </Button>
     </div>
 
-
-    <!--    <Pagination v-slot="{ page }" :items-per-page="itemsPerPage.value" :total="totalPages.value" :sibling-count="1" show-edges :default-page="0">-->
-    <!--      <PaginationList v-slot="{ items }" class="flex items-center gap-1">-->
-    <!--        <PaginationFirst @click="nextPage" />-->
-    <!--        <PaginationPrev @click="prevPage"/>-->
-
-    <!--        <template v-for="(item, index) in items">-->
-    <!--          <PaginationListItem v-if="item.type === 'page'" :key="index" :value="item.value" as-child>-->
-    <!--            <Button class="w-9 h-9 p-0" :variant="item.value === page ? 'default' : 'outline'">-->
-    <!--              {{ item.value }}-->
-    <!--            </Button>-->
-    <!--          </PaginationListItem>-->
-    <!--          <PaginationEllipsis v-else :key="item.type" :index="index" />-->
-    <!--        </template>-->
-
-    <!--        <PaginationNext />-->
-    <!--        <PaginationLast />-->
-    <!--      </PaginationList>-->
-    <!--    </Pagination>-->
 
   </div>
 
