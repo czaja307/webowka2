@@ -256,7 +256,6 @@ const cancelEditing = () => {
                       v-model="currentAuthor.firstName"
                       type="text"
                       id="Name"
-                      :disabled="editingId === author.id"
                   />
                 </div>
                 <div class="justify-start flex flex-col">
@@ -273,7 +272,6 @@ const cancelEditing = () => {
                       v-model="currentAuthor.lastName"
                       type="text"
                       id="lName"
-                      :disabled="editingId === author.id"
                   />
                 </div>
                 <div class="justify-start flex flex-col">
