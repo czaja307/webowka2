@@ -29,7 +29,7 @@ public class BookService {
         Book book = new Book();
         book.setTitle(bookRequestDTO.getTitle());
         book.setPages(bookRequestDTO.getPages());
-        book.setIsAvailable(bookRequestDTO.getIsAvailable());
+        book.setIsAvailable(true);
 
         if (bookRequestDTO.getAuthorId() != null) {
             Optional<Author> author = authorRepo.findById(bookRequestDTO.getAuthorId());

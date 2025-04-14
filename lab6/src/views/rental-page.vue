@@ -135,7 +135,7 @@ const fetchRentals = async ({queryKey}: {
 };
 
 const {data, error, isLoading, isError} = useQuery({
-  queryKey: queryKey.value,
+  queryKey,
   queryFn: fetchRentals,
   keepPreviousData: true,
 })
@@ -206,7 +206,7 @@ const prevPage = () => {
   if (page.value > 0) {
     page.value--;
   }
-  queryClient.invalidateQueries({queryKey: ['books']});
+  queryClient.invalidateQueries({queryKey: queryKey.value});
 };
 
 
