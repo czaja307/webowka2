@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: lab5_db
+    environment:
+      POSTGRES_DB: lab5
+      POSTGRES_USER: apoloniaabramowicz
+      POSTGRES_PASSWORD: stonka
+#    ports:
+#      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    image: openjdk:21-jdk
+    container_name: lab5_app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["./mvnw", "spring-boot:run"]
+
+volumes:
+  postgres_data:
